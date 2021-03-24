@@ -1,0 +1,3 @@
+{
+    "aboutTheApp":"https://github.com/GilMuzika/Electron_with_rest_API_first_demo_project"
+}

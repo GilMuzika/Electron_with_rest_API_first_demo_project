@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- ordinary CSS -->
+    <link rel="stylesheet" href="style.css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0/dist/css/bootstrap.css" />
+
+<!-- jQuery, Popper and Bootstrap JS. jQuery and Popper is requird by Bootstrap, the order of links is matter -->
+<script src="./bootstrap/bootstrap-4.0.0/js//tests/vendor/jquery-1.9.1.min.js"></script>
+<script src="./bootstrap/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+<script src="./bootstrap/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+
+
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>The applcation's webContents had been manually reloaded. Please don't play with "Ctrl + R"</title>
+    <style>
+      html { font-family: sans-serif;  color: #9FEAF9; }
+    </style>
+  </head>
+  <body>
+    
+    
+<div class="div-as-main-containerer">
+    <table class="tabe-as-main-container  take-maximum-width">
+      <tr>
+        <td>
+          <div style="padding: 5px;">
+            <!--<button type="button" class="btn btn-primary">Login</button>-->
+
+
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chose your action
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" id="login-dropdown-item_">Login</a>
+                <a class="dropdown-item" href="#" id="get-all-airlines-dropdown-item_">Get All Airline Companies</a>
+                <a class="dropdown-item" href="#" id="get-all-flights-dropdown-item_">Get All Flights</a>
+                <a class="dropdown-item" href="#" id="get-all-countries-dropdown-item_">Get All Countries</a>
+                <a class="dropdown-item" href="#" id="get-all-customers-dropdown-item_">Get All Customers</a>
+              </div>
+            </div>
+
+
+
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="take-maximum-width" id="all-cards_">
+
+			<div class="standard-box take-maximum-width  hide"  id="getAllElementsCard_">
+				<div></div>
+				<br/>
+				<button class="login-in-card-contains-button" id="get_all_elements_button_">Get All Airlines</button>
+			</div>
+
+            <div class="standard-box hide" id="loginCard_"> 
+		
+						<table >
+							<tbody>
+							  <tr>
+								<td>
+									User Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+									<input type="text" id="login_username_" value="GO7jOJ" />
+								</td>
+							  </tr>
+							  <tr>
+								<td>
+									Password:
+								</td>
+								<td>
+									<input type="text" id="login_password_" value="WD1v0VJ" />
+								</td>
+							  </tr>
+							  <tr>
+								<td colspan="2" style="text-align: center;">
+									<br/>
+									<button class="login-in-card-contains-button" id="get_login_button_">Send</button>
+								</td>
+							  </tr>
+							</tbody>
+							</table>
+						
+						
+            
+            </div>
+      
+        </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+
+    <script>
+      // You can also require other files to run in this process
+	  require('./mainRenderer.js');
+      require('./loginCardRenderer.js');
+	  require('./getAllElementsCardRenderer.js');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "name": "rest-api-project",
+  "version": "1.0.0",
+  "description": " Electron client that uses rest API demo",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "watch": "nodemon --exec electron .",
+    "inspect": "nodemon --exec electron --inspect=9222 .",
+    "debug": "nodemon --exec electron --inspect-brk=9222 .",
+    "reset": "git reset --hard"
+  },
+  "repository": "https://github.com/GilMuzika/Electron_with_rest_API_first_demo_project",
+  "keywords": [
+    "Electron",
+    "Rest API project",
+    "demo"
+  ],
+  "author": "Gil Muzika",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^9.0.0",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "colors": "^1.4.0",
+    "devtools-detect": "^3.0.1",
+    "electron-alert": "^0.1.11",
+    "electron-window-state": "^5.0.3",
+    "stringify-object": "^3.3.0"
+  },
+  "build": {
+    "appId": "https://www.facebook.com/profile.php?id=100003098807953",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "zip"
+    },
+    "linux": {
+      "category": "utility",
+      "target": "zip"
+    }
+  }
+}
