@@ -48,6 +48,7 @@ debugger;
   })
 
   mainWindow.once('ready-to-show', () => {
+    mainWindow.webContents.send('reconstruct-user-dropdown-items');
     mainWindow.webContents.send('give-me-dropdown-items-names');
     debugger;
         menu.eventEmitter.on('dropDownMenuButtonTextTaken', (data) => {

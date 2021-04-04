@@ -13,8 +13,11 @@ exports.eventEmitter = new EventEmitter();
 let template;
 
 ipcMain.handle('take-dropdown-items-names', (e, data) => {
+    debugger;
+    let dropDownMenuButtonInfo;
+    if(data.length > 1)
+        dropDownMenuButtonInfo = data.pop();
 
-    let dropDownMenuButtonInfo = data.pop();
     if(dropDownMenuButtonInfo !== undefined && dropDownMenuButtonInfo !== null) {
 
            this.eventEmitter.emit('dropDownMenuButtonTextTaken', dropDownMenuButtonInfo);  
@@ -23,6 +26,7 @@ ipcMain.handle('take-dropdown-items-names', (e, data) => {
         let dropdownSubmenu  = data.map((one) => {
             return {
                 label: `&${one.innerText}`,
+                idInDom: one.id,
                 click: () => {
                     webContents = e.sender;
                     e.sender.send(`DROPDOWNITEM_${one.id}`);
@@ -32,18 +36,32 @@ ipcMain.handle('take-dropdown-items-names', (e, data) => {
         });
 
     if(template !== undefined) {
-        template[0].submenu = dropdownSubmenu;
+        if(dropdownSubmenu.length > 1)
+            template[0].submenu = dropdownSubmenu;
+        else 
+        template[0].submenu.push(dropdownSubmenu[0]);
+
 
                 //Build menu from template
                 let menu = Menu.buildFromTemplate(template);
     
                 Menu.setApplicationMenu(menu);
     }
-
-
-
-    
   });
+
+  
+ipcMain.handle('clear-user-menu-items', (e, data) => {
+    debugger;
+    if(template === undefined)
+        return;
+
+    template[0].submenu = template[0].submenu.filter((one) =>   !data.includes(one.idInDom)   );
+
+    //Build menu from template
+    let menu = Menu.buildFromTemplate(template);
+    
+    Menu.setApplicationMenu(menu);
+});
 
 
 //Module function to create the app menu

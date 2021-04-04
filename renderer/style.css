@@ -10,6 +10,17 @@
     -webkit-user-select: none ;
 }
 
+.widthless-box {
+    border-color: #5c4d9c;
+    border-radius: 10px;
+    border-width: '5px';
+    border-style: solid;
+    background:  rgb(234, 217, 243);
+    padding: 3px;
+
+    -webkit-user-select: none ;
+}
+
 .take-maximum-width {
     display: flex;
     flex-grow: 1;

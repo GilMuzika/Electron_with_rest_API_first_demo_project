@@ -1,5 +1,6 @@
 "use strict";
 const axios = require('axios');
+const { nativeImage } = require('electron');
 
 
 let messageDivOnLoginCard;
@@ -75,6 +76,7 @@ exports.writeMessageOnCard = (card, message, optionalMessageDivChildNode) => {
 //"messageDivForRemoving" is  "messageDiv" from the previous function ("writeMessageOnCard"),
 //but it's importatnt to get it from the caller, because there is a condition, and it also can be taken as an undefined variable.
 exports.restoreCardToNormal = (card, messageDivForRemoving) => {
+    debugger;
     this.hideAllCards();
 
     card.classList.remove('hide');
@@ -86,7 +88,9 @@ exports.restoreCardToNormal = (card, messageDivForRemoving) => {
     }
 
     if(messageDivForRemoving !== undefined)
-        card.removeChild(messageDivForRemoving);
+        if(card.contains(messageDivForRemoving)) {
+            card.removeChild(messageDivForRemoving);
+        }
 };
 
 //if "messageDiv" (a div with a message) by some reason wasn't removed by reference in "restoreCardToNormal" function or otherwise,
@@ -244,4 +248,90 @@ exports.dropDownItemEventListenerLogic = (e, urlInTheBackendStr, constructOneCal
     };
 
     getAllElementsButton.addEventListener('click', getAllElementsEventListenerFunc);
+};
+
+exports.validateUrl = (value) => {
+	return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
+}
+
+exports.isObjectContainsKeyWith = (object, withWhatStr) => {
+    if(typeof object !== 'object' || typeof withWhatStr !== 'string')
+            return false;
+    for(let s in object) {
+        if(s.includes(withWhatStr))
+            return true;
+    }
+    return false;
+};
+
+exports.constructOne = async (one, istableHeadBool) => {
+    const tr = document.createElement('tr');
+    for(let s in one) {
+        debugger;
+            if(typeof one[s] !== 'object') {
+                //if(s !== 'iD' && s !== 'StatusMessage' && s !== 'StatusColor') {
+                        const td = document.createElement('td');
+                        const th = document.createElement('th');
+                        td.setAttribute('class', 'standard-grid-table-cell');
+                        th.setAttribute('class', 'standard-grid-table-cell');
+                        
+
+                            if(istableHeadBool) {
+                                th.innerText = s;
+                            } else {
+                                if(s !== 'Image') {
+                                td.innerText = one[s];
+                                }
+                                else {
+                                    const img = document.createElement('img');
+                                    let size = nativeImage.createFromDataURL(one[s]).getSize();
+                                    td.setAttribute('width', size.width);
+                                    img.setAttribute('src', one[s]);
+                                    td.appendChild(img);
+                                }
+                            }
+
+
+                        if(istableHeadBool)
+                            tr.appendChild(th)
+                        else
+                            tr.appendChild(td);
+                //}
+            }
+
+    }
+    return tr;
+ }; 
+
+
+
+ exports.addNewDropdownItemFromObject = (dropDownMenu, itemObj) => {
+    debugger;
+    let newItem = document.createElement('a');
+    newItem.setAttribute('class', 'dropdown-item');
+    newItem.setAttribute('href', '#');
+    newItem.setAttribute('id', itemObj.id);
+    newItem.innerText = itemObj.text;
+    newItem.addEventListener('click', (e) => {
+        this.dropDownItemEventListenerLogic(e, itemObj.url, this.constructOne);    
+    });
+
+    dropDownMenu.appendChild(newItem);
+    return newItem;
+};
+
+
+
+exports.clearUserDropdownItems = (dropDownMenu, userItemsObj) => {
+    let userDropdownItemsIdsArr = [];
+    for(let s in userItemsObj) {
+        for(let d in dropDownMenu.children) {
+            if(dropDownMenu.children[d].id === userItemsObj[s].id) {
+                dropDownMenu.removeChild(dropDownMenu.children[d]);
+                userDropdownItemsIdsArr.push(userItemsObj[s].id);
+            }
+        }
+
+    }
+    return userDropdownItemsIdsArr;
 };

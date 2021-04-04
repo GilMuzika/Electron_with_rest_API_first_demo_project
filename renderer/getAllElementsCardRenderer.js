@@ -3,6 +3,7 @@ const { nativeImage, ipcRenderer } = require('electron');
 const functionsLibrary = require('./functionsLibrary');
 
 let titleNode = document.getElementsByTagName('title')[0];
+let urlInTheBackend;
 
 const allDroopdownItemsMap = new Map();
 let addToallDroopdownItemsMap = (key, value) => {
@@ -14,34 +15,45 @@ let addToallDroopdownItemsMap = (key, value) => {
 };
 
 // יש הרבה ממנו
-let getAllAirlinesDropdownMenuItem = document.getElementById('get-all-airlines-dropdown-item_');
+const getAllAirlinesDropdownMenuItem = document.getElementById('get-all-airlines-dropdown-item_');
 //
-let getAllFlightsDropdownMenuItem = document.getElementById('get-all-flights-dropdown-item_');
+const getAllFlightsDropdownMenuItem = document.getElementById('get-all-flights-dropdown-item_');
 
-let getAllCountriesDropdownMenuItem = document.getElementById('get-all-countries-dropdown-item_');
+const getAllCountriesDropdownMenuItem = document.getElementById('get-all-countries-dropdown-item_');
 
-let getAllCustomersDropdownMenuItem = document.getElementById('get-all-customers-dropdown-item_');
+const getAllCustomersDropdownMenuItem = document.getElementById('get-all-customers-dropdown-item_');
+
+const getAllJsonPlaceholderTodosDropdownMenuItem = document.getElementById('get-all-jsonplaceholder-todos-dropdown-item_');
+
+
+
+getAllJsonPlaceholderTodosDropdownMenuItem.addEventListener('click', (e) => {
+    urlInTheBackend = 'https://jsonplaceholder.typicode.com/todos/';
+    functionsLibrary.dropDownItemEventListenerLogic(e, urlInTheBackend, functionsLibrary.constructOne);
+});
+
+
 
 
 getAllCustomersDropdownMenuItem.addEventListener('click', (e) => {
-    const urlInTheBackend = 'https://localhost:44361/api/LoggedInCustomerFacade/GetAllCustomers';
+     urlInTheBackend = 'https://localhost:44361/api/LoggedInCustomerFacade/GetAllCustomers';
    functionsLibrary.dropDownItemEventListenerLogic(e, urlInTheBackend, prepareCustomerToConstruct);
 });
 
 getAllAirlinesDropdownMenuItem.addEventListener('click', (e) => {
-    const urlInTheBackend = 'https://localhost:44361/api/LoggedInAdministratorFacade/GetAllAirlineCompanies';
+     urlInTheBackend = 'https://localhost:44361/api/LoggedInAdministratorFacade/GetAllAirlineCompanies';
    functionsLibrary.dropDownItemEventListenerLogic(e, urlInTheBackend, prepareAirlineToConstruct);
 });
 
 
 getAllFlightsDropdownMenuItem.addEventListener('click', (e) => {
-    const urlInTheBackend = 'https://localhost:44361/api/AnonimousUserFacade/GetAllCountries';
-   functionsLibrary.dropDownItemEventListenerLogic(e, urlInTheBackend, prepareCountryToConstruct);
+     urlInTheBackend = 'https://localhost:44361/api/AnonimousUserFacade/GetAllFlights';
+   functionsLibrary.dropDownItemEventListenerLogic(e, urlInTheBackend, prepareFlightToConstruct);
 });
 
 getAllCountriesDropdownMenuItem.addEventListener('click', (e) => {
-    const urlInTheBackend = 'https://localhost:44361/api/AnonimousUserFacade/GetAllFlights';
-   functionsLibrary.dropDownItemEventListenerLogic(e, urlInTheBackend, prepareFlightToConstruct);
+     urlInTheBackend = 'https://localhost:44361/api/AnonimousUserFacade/GetAllCountries';
+   functionsLibrary.dropDownItemEventListenerLogic(e, urlInTheBackend, prepareCountryToConstruct);
 });
 
 let prepareFlightToConstruct = async (flight, isTableHeadBool) => {
@@ -53,7 +65,7 @@ let prepareFlightToConstruct = async (flight, isTableHeadBool) => {
             newFlight[s] = flight[s];
         }
     }
-    return await constructOne(newFlight, isTableHeadBool);
+    return await functionsLibrary.constructOne(newFlight, isTableHeadBool);
 };
 
 let prepareCountryToConstruct = async (country, isTableHeadBool) => {
@@ -65,7 +77,7 @@ let prepareCountryToConstruct = async (country, isTableHeadBool) => {
             newCountry[s] = country[s];
         }
     }
-    return await constructOne(newCountry, isTableHeadBool);
+    return await functionsLibrary.constructOne(newCountry, isTableHeadBool);
 };
 
 let prepareAirlineToConstruct = async (airline, isTableHeadBool) => {
@@ -77,7 +89,7 @@ let prepareAirlineToConstruct = async (airline, isTableHeadBool) => {
             newAirline[s] = airline[s];
         }
     }
-    return await constructOne(newAirline, isTableHeadBool);
+    return await functionsLibrary.constructOne(newAirline, isTableHeadBool);
 };
 
 let prepareCustomerToConstruct = async (customer, isTableHeadBool) => {
@@ -89,12 +101,12 @@ let prepareCustomerToConstruct = async (customer, isTableHeadBool) => {
             newCustomer[s] = customer[s];
         }
     }
-    return await constructOne(newCustomer, isTableHeadBool);
+    return await functionsLibrary.constructOne(newCustomer, isTableHeadBool);
 };
 
 
 
-let constructOne = async (one, istableHeadBool) => {
+/*let constructOne = async (one, istableHeadBool) => {
     const tr = document.createElement('tr');
     for(let s in one) {
         debugger;
@@ -131,7 +143,7 @@ let constructOne = async (one, istableHeadBool) => {
 
     }
     return tr;
- }; 
+ }; */
 
 
 

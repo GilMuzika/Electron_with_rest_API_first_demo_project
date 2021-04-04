@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="./bootstrap/bootstrap-4.0.0/dist/css/bootstrap.css" />
 
 <!-- jQuery, Popper and Bootstrap JS. jQuery and Popper is requird by Bootstrap, the order of links is matter -->
-<script src="./bootstrap/bootstrap-4.0.0/js//tests/vendor/jquery-1.9.1.min.js"></script>
+<script src="./bootstrap/bootstrap-4.0.0/js/tests/vendor/jquery-1.9.1.min.js"></script>
 <script src="./bootstrap/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
 <script src="./bootstrap/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
 
@@ -23,8 +23,7 @@
     </style>
   </head>
   <body>
-    
-    
+
 <div class="div-as-main-containerer">
     <table class="tabe-as-main-container  take-maximum-width">
       <tr>
@@ -43,6 +42,10 @@
                 <a class="dropdown-item" href="#" id="get-all-flights-dropdown-item_">Get All Flights</a>
                 <a class="dropdown-item" href="#" id="get-all-countries-dropdown-item_">Get All Countries</a>
                 <a class="dropdown-item" href="#" id="get-all-customers-dropdown-item_">Get All Customers</a>
+                <a class="dropdown-item" href="#" id="place-fake-token-dropdown-item_">Place Fake Token</a>
+                <a class="dropdown-item" href="#" id="get-all-jsonplaceholder-todos-dropdown-item_">Get JSONPlaceholder ToDo's</a>
+                <hr/>
+                <!--<a class="dropdown-item" href="#" id="add-more-dropdown-items_">Add More Dropdown Items</a>-->
               </div>
             </div>
 
@@ -51,8 +54,12 @@
           </div>
         </td>
       </tr>
+  
       <tr>
-        <td>
+        <td style="text-align: center;">
+          <button class="login-in-card-contains-button"  id="add-more-dropdown-items_">Add More Dropdown Items</button>
+          <button class="login-in-card-contains-button"  id="clear-user-dropdown-items_">Clear User Dropdown Items</button>
+          <br/><br/>
           <div class="take-maximum-width" id="all-cards_">
 
 			<div class="standard-box take-maximum-width  hide"  id="getAllElementsCard_">
@@ -60,6 +67,37 @@
 				<br/>
 				<button class="login-in-card-contains-button" id="get_all_elements_button_">Get All Airlines</button>
 			</div>
+
+            <div class="standard-box take-maximum-width hide" id="add-more-dropdown-items-card_">
+              
+              <table >
+                <tbody>
+                  <tr>
+                  <td>
+                    Menu Item Text: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </td>
+                  <td>
+                    <input type="text" id="new-menu-item-text_" value="JSON Place Holder Comments" />
+                  </td>
+                  </tr>
+                  <tr>
+                  <td>
+                    Rest API URL:
+                  </td>
+                  <td>
+                    <input type="text" id="new-menu-item-rest-api-url_" value="https://jsonplaceholder.typicode.com/comments" />
+                  </td>
+                  </tr>
+                  <tr>
+                  <td colspan="2" style="text-align: center;">
+                    <br/>
+                    <button class="login-in-card-contains-button" id="create-new-menu-item-button_">Add</button>
+                  </td>
+                  </tr>
+                </tbody>
+                </table>
+
+            </div>
 
             <div class="standard-box hide" id="loginCard_"> 
 		
